@@ -1194,10 +1194,10 @@ GameObject:
   - component: {fileID: 4379727201634385066}
   - component: {fileID: 4379727201634385067}
   - component: {fileID: 4379727201634385065}
-  - component: {fileID: 1634815698}
+  - component: {fileID: 459194660}
   m_Layer: 0
   m_Name: Player
-  m_TagString: obstacle
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1236,10 +1236,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!65 &4379727201634385067
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1261,7 +1261,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3460597944350907929}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 429595167ae96a94bb0c19f5eae31a94, type: 3}
   m_Controller: {fileID: 9100000, guid: 23899b9b98300cc4d9c05cc5299366a7, type: 2}
   m_CullingMode: 0
@@ -1272,7 +1272,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1634815698
+--- !u!114 &459194660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1281,11 +1281,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3460597944350907929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74e4f12c8d91c094ab041b69dbb3a146, type: 3}
+  m_Script: {fileID: 11500000, guid: d5d6d7290343ff149b0922cb0da4472b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 50
-  speed: 5
+  jumpForce: 10
+  speed: 10
+  gravityScale: 4
+  grounded: 1
 --- !u!1 &3650594480027765309
 GameObject:
   m_ObjectHideFlags: 0

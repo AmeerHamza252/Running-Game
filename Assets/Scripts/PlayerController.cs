@@ -12,10 +12,33 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
     public bool grounded=false;
     private Animator myAnim;
-   
-   // bool isRunning = false;
+    bool isPlaying;
+    // bool isRunning = false;
+
+    private void OnEnable()
+    {
+        GameManager.OnGameStart += GameStart;
+        GameManager.OnGameOver += GameOver;
+    }
 
 
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStart -= GameStart;
+        GameManager.OnGameOver -= GameOver;
+    }
+    private void GameStart(float spawnSpeed)
+    {
+        isPlaying = true;
+       
+    }
+    private void GameOver()
+    {
+        isPlaying = false;
+        speed = 0;
+        myAnim.SetFloat("Speed", speed);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +49,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isPlaying) return;
         Movement();
         //Jumping();
     }
@@ -53,15 +77,39 @@ public class PlayerController : MonoBehaviour
             //transform.Translate(Vector3.up * jumpForce);
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision hamza)
     {
         grounded = true;
+        if (hamza.gameObject.tag == "obstacle")
+        {
+            Destroy(hamza.gameObject);
+            GameManager.Instance.GameOver();
+            //Debug.Log("collision detect");
+           /* Restartbtn.gameObject.SetActive(true);
+            gameover.gameObject.SetActive(true);*/
+
+            //SceneManager.LoadScene("Level1");
+        }
+
     }
     private void OnCollisionExit(Collision collision)
     {
         grounded = false;
     }
+    private void OnTriggerEnter(Collider Con)//Coins Detect
+    {
+        if (Con.gameObject.tag == "Coin")
+        {
+            //coins=coins+1;
+            //score=score+1;
+            //scoreText.text = score.ToString();
+            Con.gameObject.SetActive(false);
+            GameManager.Instance.AddScore(5);
+            Destroy(Con.gameObject);
+            Debug.Log("Coin Collected");
 
+        }
+    }
     // private void OnTriggerEnter(Collider other)
     //{
     //    if (other.gameObject.tag == "obstacle")

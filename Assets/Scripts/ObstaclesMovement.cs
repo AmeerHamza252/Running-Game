@@ -6,6 +6,32 @@ using UnityEngine.SceneManagement;
 public class ObstaclesMovement : MonoBehaviour
 {
     private float oSpeed = 20.0f;
+    bool isPlaying = true;
+    // bool isRunning = false;
+
+    private void OnEnable()
+    {
+       
+        GameManager.OnGameOver += GameOver;
+    }
+
+
+
+    private void OnDisable()
+    {
+       
+        GameManager.OnGameOver -= GameOver;
+    }
+    private void GameStart(float spawnSpeed)
+    {
+        isPlaying = true;
+
+    }
+    private void GameOver()
+    {
+        isPlaying = false;
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -13,8 +39,9 @@ public class ObstaclesMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()//obstacles movement
     {
+        if(isPlaying)
         transform.Translate(Vector3.forward*Time.deltaTime*oSpeed);
     }
 

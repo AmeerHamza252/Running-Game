@@ -9,40 +9,45 @@ public class SpawnManager : MonoBehaviour
     public GameObject coins;
     private float spawnSpeed = 2;
     private float timer = 0;
+    [SerializeField]
+    bool isPlaying;
+   
+    private void OnEnable()
+    {
+        GameManager.OnGameStart += GameStart;
+        GameManager.OnGameOver += GameOver;
+    }
 
-    public enum GameMode { Easy, Hard }
-    public GameMode gameMode = GameMode.Easy;
-    public bool IsGameStarted = false;
+    
 
-
-     void Start()
+    private void OnDisable()
+    {
+        GameManager.OnGameStart -= GameStart;
+        GameManager.OnGameOver -= GameOver;
+    }
+    private void GameStart(float spawnSpeed)
+    {
+        isPlaying = true;
+        this.spawnSpeed = spawnSpeed;
+    }
+    private void GameOver()
+    {
+        isPlaying = false;
+    }
+    void Start()
     {
        
     }
     void Update()
     {
+        if (!isPlaying) return;
+
         spawnObstacles();
         spawnCoins();
 
     }
 
-    public void StartGame(int gamemode)
-    {
-        IsGameStarted = true;
-        switch (gamemode)
-        {
-            case 0:
-                gameMode = GameMode.Easy;
-                spawnSpeed = 3;
-                break;
-            case 1:
-                gameMode = GameMode.Hard;
-                spawnSpeed = 1;
-                break;
-            default:
-                break;
-        }
-     }
+    
 
     void spawnObstacles()// spawn obstacles
     {
