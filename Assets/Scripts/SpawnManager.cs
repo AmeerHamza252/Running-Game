@@ -43,7 +43,9 @@ public class SpawnManager : MonoBehaviour
         if (!isPlaying) return;
 
         spawnObstacles();
-        spawnCoins();
+        spawnCoins3();
+        spawnCoins2();
+        spawnCoins1();
 
     }
 
@@ -56,20 +58,43 @@ public class SpawnManager : MonoBehaviour
             int rand = Random.Range(0, obstaclePrefabs.Length);
 
             GameObject obs = Instantiate(obstaclePrefabs[rand]);
-            obs.transform.position = transform.position + new Vector3(29, 1, -30);
+            obs.transform.position = transform.position + new Vector3(29, 0, -30);
             timer = 0;
         }
         timer += Time.deltaTime;
 
     }
-    void spawnCoins()//spawn coins
+    void spawnCoins2()//spawn coins
     {
         if (timer > spawnSpeed)
         {
-            //int rand = Random.Range(0, coins);
 
             GameObject coin = Instantiate(coins);
-            coin.transform.position = transform.position + new Vector3(29, 4, -30);
+            coin.transform.position = transform.position + new Vector3(29, 6, -30);
+            timer = 0;
+
+        }
+        timer += Time.deltaTime;
+
+    }
+    void spawnCoins1()//spawn coins
+    {
+        if (timer > spawnSpeed)
+        {
+           GameObject coin = Instantiate(coins);
+            coin.transform.position = transform.position + new Vector3(29, 2, -30);
+            timer = 0;
+
+        }
+        timer += Time.deltaTime;
+
+    }
+    void spawnCoins3()//spawn coins
+    {
+        if (timer > spawnSpeed)
+        {
+            GameObject coin = Instantiate(coins);
+            coin.transform.position = transform.position + new Vector3(29, 8, -30);
             timer = 0;
 
         }

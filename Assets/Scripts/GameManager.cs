@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 gameMode = GameMode.Easy;
-                spawnSpeed = 3;
+                spawnSpeed = 5;
                 break;
             case 1:
                 gameMode = GameMode.Hard;
