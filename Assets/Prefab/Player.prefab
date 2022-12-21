@@ -1192,7 +1192,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4273163784292123811}
   - component: {fileID: 4379727201634385066}
-  - component: {fileID: 4379727201634385067}
   - component: {fileID: 4379727201634385065}
   - component: {fileID: 459194660}
   - component: {fileID: 7451966148932571532}
@@ -1234,26 +1233,13 @@ Rigidbody:
   m_GameObject: {fileID: 3460597944350907929}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.6
+  m_AngularDrag: 0.52
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
---- !u!65 &4379727201634385067
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3460597944350907929}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 3.8977995, z: 0.86025006}
-  m_Center: {x: 1.0480529e-16, y: 1.9135563, z: 0.069875}
+  m_CollisionDetection: 3
 --- !u!95 &4379727201634385065
 Animator:
   serializedVersion: 3
@@ -1285,7 +1271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d6d7290343ff149b0922cb0da4472b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 10
+  jumpForce: 15
   speed: 10
   gravityScale: 4
   grounded: 1

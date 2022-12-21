@@ -13,11 +13,22 @@ public class PlayerController : MonoBehaviour
     public bool grounded=false;
     private Animator myAnim;
     bool isPlaying;
-    // bool isRunning = false;
+    private int desiredLane = 1;
+    private float laneDistance = 8f;
+
+    private Vector3 TargetDirectionPosition;
+    enum Lane
+    {
+        L1,
+        L2,
+        L3
+    }
+
+    Lane currentLane = Lane.L2;
 
     private void OnEnable()
     {
-        GameManager.OnGameStart += GameStart;
+        GameManager.OnGameStart += GameSpawnerStart;
         GameManager.OnGameOver += GameOver;
     }
 
@@ -25,10 +36,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.OnGameStart -= GameStart;
+        GameManager.OnGameStart -= GameSpawnerStart;
         GameManager.OnGameOver -= GameOver;
     }
-    private void GameStart(float spawnSpeed)
+    private void GameSpawnerStart(float spawnSpeed)
     {
         isPlaying = true;
        
@@ -42,6 +53,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       // m_Rigidbody = GetComponent<Rigidbody>();
         rb = GetComponent<Rigidbody>();//Get Rigidbody
         myAnim = GetComponent<Animator>();//Get Animator
     }
@@ -51,8 +63,75 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPlaying) return;
         Movement();
-        //Jumping();
+        PlayerDirection();
+
+
     }
+    void PlayerDirection()
+    {
+        /*if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            desiredLane++;
+            if (desiredLane == 3)
+                desiredLane = 2;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            desiredLane--;
+            if (desiredLane == -1)
+                desiredLane = 0;
+        }
+        Vector3 targetPosition = transform.position.z * transform.position.y * transform.up;
+        if (desiredLane == 0)
+        {
+            targetPosition += Vector3.left * laneDistance;
+        }
+        else if (desiredLane == 2)
+        {
+            targetPosition += Vector3.right * laneDistance;
+        }
+        transform.position = targetPosition;*/
+
+        switch (currentLane)
+        {
+            case Lane.L1: Lane1();break;
+            case Lane.L2: Lane2();break;
+            case Lane.L3: Lane3();break;
+        }
+    }
+
+    void Lane1()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentLane = Lane.L2;
+            TargetDirectionPosition = Vector3.zero;
+        }
+    }
+
+    void Lane2()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentLane = Lane.L3;
+            TargetDirectionPosition = transform.right * laneDistance;
+        }else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentLane = Lane.L1;
+            TargetDirectionPosition = -transform.right * laneDistance;
+        }
+    }
+
+    void Lane3()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentLane = Lane.L2;
+            TargetDirectionPosition = Vector3.zero;
+        }
+    }
+
+
     //Vector3 prevPoint;
     void Movement()//Player Movement with Animation
     {
@@ -62,19 +141,31 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            myAnim.SetTrigger("slide");                 
+            myAnim.SetTrigger("slide");
+            
+            GetComponent<CapsuleCollider>().height = 2f ;
+            GetComponent<CapsuleCollider>().center = Vector3.up;
+            //isSlide = true;
         }
+        //if(myAnim.GetCurrentAnimatorClipInfo(0).)
+        // m_Rigidbody.MovePosition(transform.position * Time.deltaTime * speed);
+
     }
     private void FixedUpdate()//player jump
     {
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
         if (Input.GetKey(KeyCode.Space) && grounded)
         {
+            Debug.Log("Jump");
 
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            //Debug.Log("ajaasaa");
            // grounded = true;
             //transform.Translate(Vector3.up * jumpForce);
+        }
+      if(Vector3.Distance(transform.position, TargetDirectionPosition) > 0.1f)
+        {
+            Vector3 lerpPoint = Vector3.Lerp(transform.position, TargetDirectionPosition, Time.deltaTime * 5f);
+            rb.MovePosition(lerpPoint);
         }
     }
     private void OnCollisionEnter(Collision hamza)
@@ -109,6 +200,12 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Coin Collected");
 
         }
+    }
+
+    public void SlideEnd()
+    {
+        GetComponent<CapsuleCollider>().height = 4f;
+        GetComponent<CapsuleCollider>().center = Vector3.up * 2;
     }
     // private void OnTriggerEnter(Collider other)
     //{

@@ -5,9 +5,11 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] obstaclePrefabs;
-    public int obstacleIndex;
+    public GameObject[] coinsPrefabs;
+    public GameObject[] coins1Prefabs;
+    //public int obstacleIndex;
     public GameObject coins;
-    private float spawnSpeed = 2;
+    private float spawnSpeed = 1;
     private float timer = 0;
     [SerializeField]
     bool isPlaying;
@@ -43,8 +45,8 @@ public class SpawnManager : MonoBehaviour
         if (!isPlaying) return;
 
         spawnObstacles();
-        spawnCoins3();
-        spawnCoins2();
+       // spawnCoins3();
+       spawnCoins2();
         spawnCoins1();
 
     }
@@ -58,7 +60,7 @@ public class SpawnManager : MonoBehaviour
             int rand = Random.Range(0, obstaclePrefabs.Length);
 
             GameObject obs = Instantiate(obstaclePrefabs[rand]);
-            obs.transform.position = transform.position + new Vector3(29, 0, -30);
+            obs.transform.position = transform.position + new Vector3(0, 0, -130);
             timer = 0;
         }
         timer += Time.deltaTime;
@@ -68,11 +70,11 @@ public class SpawnManager : MonoBehaviour
     {
         if (timer > spawnSpeed)
         {
-
-            GameObject coin = Instantiate(coins);
-            coin.transform.position = transform.position + new Vector3(29, 6, -30);
+            int rand = Random.Range(0, coinsPrefabs.Length);
+            GameObject coin = Instantiate(coinsPrefabs[rand]);
+            coin.transform.position = transform.position + new Vector3(0, 0, -130);
             timer = 0;
-
+            Debug.Log("2222");
         }
         timer += Time.deltaTime;
 
@@ -81,24 +83,26 @@ public class SpawnManager : MonoBehaviour
     {
         if (timer > spawnSpeed)
         {
-           GameObject coin = Instantiate(coins);
-            coin.transform.position = transform.position + new Vector3(29, 2, -30);
+            int rand = Random.Range(0, coins1Prefabs.Length);
+            GameObject coin = Instantiate(coins1Prefabs[rand]);
+            coin.transform.position = transform.position + new Vector3(0, 0, -130);
             timer = 0;
+            Debug.Log("1111");
 
         }
         timer += Time.deltaTime;
 
     }
-    void spawnCoins3()//spawn coins
-    {
-        if (timer > spawnSpeed)
-        {
-            GameObject coin = Instantiate(coins);
-            coin.transform.position = transform.position + new Vector3(29, 8, -30);
-            timer = 0;
+    //void spawnCoins3()//spawn coins
+    //{
+    //    if (timer > spawnSpeed)
+    //    {
+    //        GameObject coin = Instantiate(coins);
+    //        coin.transform.position = transform.position + new Vector3(0, 8, -130);
+    //        timer = 0;
 
-        }
-        timer += Time.deltaTime;
+    //    }
+    //    timer += Time.deltaTime;
 
-    }
+    //}
 }

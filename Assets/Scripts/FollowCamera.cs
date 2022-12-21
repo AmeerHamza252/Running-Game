@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    public Transform player;
+    public Transform followObject;
+    public Vector3 offset;
+    public float smoothness = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,8 @@ public class FollowCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position =player.transform.localPosition + new Vector3(15, 8, 83); 
+        Vector3 targetPosition=followObject.position+offset;
+        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothness*Time.deltaTime);
+        //transform.LookAt(followObject);
     }
 }

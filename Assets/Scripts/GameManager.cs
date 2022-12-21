@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
                 break;
             case 1:
                 gameMode = GameMode.Hard;
-                spawnSpeed = 1;
+                spawnSpeed = 2;
                 break;
             default:
                 break;
