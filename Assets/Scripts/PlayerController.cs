@@ -155,6 +155,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()//player jump
     {
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
+        //Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended;
         if (Input.GetKey(KeyCode.Space) && grounded)
         {
             Debug.Log("Jump");
