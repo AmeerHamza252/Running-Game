@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
     bool isPlaying;
     private int desiredLane = 1;
     private float laneDistance = 8f;
-
+    public ParticleSystem particale;
+    public AudioClip coinSound;
     private Vector3 TargetDirectionPosition;
     enum Lane
     {
@@ -191,6 +192,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Con.gameObject.tag == "Coin")
         {
+            DustParticales();
+            AudioSource.PlayClipAtPoint(coinSound,transform.position);
             //coins=coins+1;
             //score=score+1;
             //scoreText.text = score.ToString();
@@ -200,6 +203,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Coin Collected");
 
         }
+    }
+    void DustParticales()
+    {
+        particale.Play();
     }
 
     public void SlideEnd()
