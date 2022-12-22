@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ObstaclesMovement : MonoBehaviour
 {
-    private float oSpeed = 30.0f;
+    private float oSpeed = 80.0f;
     bool isPlaying = true;
     // bool isRunning = false;
 

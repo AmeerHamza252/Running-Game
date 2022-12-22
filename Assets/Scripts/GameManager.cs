@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public int coins;
     public int myScore=0;
 
-    public enum GameMode { Easy, Hard }
+    public enum GameMode { Easy, Medium, Hard }
     public GameMode gameMode = GameMode.Easy;
     private float spawnSpeed = 2;
     public bool IsGameStarted = false;
@@ -45,8 +45,12 @@ public class GameManager : MonoBehaviour
                 spawnSpeed = 5;
                 break;
             case 1:
+                gameMode = GameMode.Medium;
+                spawnSpeed = 3;
+                break ;
+            case 2:
                 gameMode = GameMode.Hard;
-                spawnSpeed = 2;
+                spawnSpeed = 1 ;
                 break;
             default:
                 break;
