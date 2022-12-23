@@ -17,11 +17,13 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public GameObject Restartbtn;
     public int coins;
-    public int myScore=0;
-
+    int myScore=0;
+    int highScore;
+   // float score;
+    public TextMeshProUGUI highScoretext;
     public enum GameMode { Easy, Medium, Hard }
     public GameMode gameMode = GameMode.Easy;
-    private float spawnSpeed = 2;
+    private float spawnSpeed ;
     public bool IsGameStarted = false;
 
     public static Action<float> OnGameStart;
@@ -63,6 +65,15 @@ public class GameManager : MonoBehaviour
     {
         myScore= myScore+score;
         scoreText.text = myScore.ToString();
+        if (PlayerPrefs.GetInt("score")<=highScore)
+            PlayerPrefs.SetInt("score",highScore);
+        Debug.Log("score save111");
+    }
+
+    public void highscorefun()
+    {
+        highScoretext.text = PlayerPrefs.GetInt("score").ToString();
+        Debug.Log("score save");
     }
     public void PlayButton()
     {

@@ -1,31 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class BGMovement : MonoBehaviour
 {
-    public float speed = 8f;
+    public float bspeed=1f ;
     private Vector3 StartPosition;
     public SpriteRenderer renderer;
-    float totalWidth;
+   // float totalWidth;
     bool isMoved;
-   
+    public enum Hamza { H, A };
+    private Hamza hamza = Hamza.H;
+    [SerializeField] private char mode;
+
+
     void Start()
     {
         StartPosition = transform.position;
         Debug.Log(renderer.bounds.size.z, gameObject);
     }
-
+    
    
     void Update()
     {
      //  if (!isMoved) return;
         BackgroundMovement();
+       //HMode(mode);
+
     }
     public void BackgroundMovement()
     {
         
-        transform.Translate(translation: Vector3.right * speed * Time.deltaTime);
+        transform.Translate(translation: Vector3.forward * bspeed * Time.deltaTime);
 
         if (transform.position.z > 90f)
         {
@@ -37,6 +44,30 @@ public class BGMovement : MonoBehaviour
         GameManager.OnGameOver += GameStart;
         GameManager.OnGameOver += GameOver;
     }
+    private void HMode(char mode)
+    {
+        
+        isMoved =true;
+        switch (mode)
+        {
+            case 'H':
+                hamza = Hamza.H;
+                bspeed = 1f;
+                //Debug.LogWarning("Hmode");
+                break;
+            case 'A':
+                hamza = Hamza.A;
+                bspeed = 50f;
+              //  Debug.LogWarning("mode");
+                break;
+            default: break;
+
+
+
+        }
+
+
+    }
 
 
 
@@ -47,11 +78,13 @@ public class BGMovement : MonoBehaviour
     }
     private void GameStart()
     {
-        isMoved = true;
+        isMoved = false;
+        bspeed = 0;
     } 
     private void GameOver()
     {
         isMoved = false;
+       bspeed = 0;
     }
 
 

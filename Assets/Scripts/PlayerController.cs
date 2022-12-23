@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float laneDistance = 8f;
     public ParticleSystem particale;
     public AudioClip coinSound;
+    
     private Vector3 TargetDirectionPosition;
     enum Lane
     {
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.OnGameStart -= GameSpawnerStart;
         GameManager.OnGameOver -= GameOver;
+        
     }
     private void GameSpawnerStart(float spawnSpeed)
     {
@@ -146,7 +148,7 @@ public class PlayerController : MonoBehaviour
             
             GetComponent<CapsuleCollider>().height = 2f ;
             GetComponent<CapsuleCollider>().center = Vector3.up;
-            //isSlide = true;
+            
         }
         //if(myAnim.GetCurrentAnimatorClipInfo(0).)
         // m_Rigidbody.MovePosition(transform.position * Time.deltaTime * speed);
@@ -202,7 +204,7 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.AddScore(5);
             Destroy(Con.gameObject);
             Debug.Log("Coin Collected");
-
+            GameManager.Instance.highscorefun();
         }
     }
     void DustParticales()
@@ -210,11 +212,11 @@ public class PlayerController : MonoBehaviour
         particale.Play();
     }
 
-    public void SlideEnd()
-    {
-        GetComponent<CapsuleCollider>().height = 4f;
-        GetComponent<CapsuleCollider>().center = Vector3.up * 2;
-    }
+    //public void SlideEnd()
+    //{
+    //    GetComponent<CapsuleCollider>().height = 4f;
+    //    GetComponent<CapsuleCollider>().center = Vector3.up * 2;
+    //}
     // private void OnTriggerEnter(Collider other)
     //{
     //    if (other.gameObject.tag == "obstacle")
