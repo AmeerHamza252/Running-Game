@@ -38,20 +38,26 @@ public class ObstaclesMovement : MonoBehaviour
         
     }
 
+    bool destroyed;
     // Update is called once per frame
     void Update()//obstacles movement
     {
         if(isPlaying)
         transform.Translate(Vector3.forward*Time.deltaTime*oSpeed);
+        Vector3 dir = transform.position - Camera.main.transform.position;
+        float dot = Vector3.Dot( Camera.main.transform.forward,dir.normalized);
+        Debug.Log(dot.ToString());
+        if(dot < 0 && !destroyed)
+        {
+            PoolsManager.Instance.Despawn(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            Destroy(this.gameObject);
-            
-
+            PoolsManager.Instance.Despawn(gameObject);
         }
     }
    

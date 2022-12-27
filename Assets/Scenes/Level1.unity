@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 64c46bb4d358949a997ffb2842940631, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 3e2daf398bd1f4e4c846332f493edf33, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -337,7 +337,7 @@ MonoBehaviour:
   scoreText: {fileID: 1983281620}
   Restartbtn: {fileID: 925239955}
   coins: 0
-  highScoretext: {fileID: 164701934}
+  highScoretext: {fileID: 563570992}
   gameMode: 0
   IsGameStarted: 0
 --- !u!4 &75381436
@@ -456,7 +456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 390.0001, y: 108.99997}
+  m_AnchoredPosition: {x: 370.50003, y: 108.99997}
   m_SizeDelta: {x: 200, y: 37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &164701934
@@ -1147,7 +1147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 458.00003, y: 129.33241}
+  m_AnchoredPosition: {x: 438.5, y: 129.33241}
   m_SizeDelta: {x: 66.0079, y: 17.6676}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &563570992
@@ -1179,8 +1179,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190316
-  m_fontColor: {r: 0.9245283, g: 0, b: 0, a: 1}
+    rgba: 4278714623
+  m_fontColor: {r: 1, g: 0, b: 0.03226757, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

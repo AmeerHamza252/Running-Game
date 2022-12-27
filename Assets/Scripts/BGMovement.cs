@@ -18,7 +18,7 @@ public class BGMovement : MonoBehaviour
     void Start()
     {
         StartPosition = transform.position;
-        Debug.Log(renderer.bounds.size.z, gameObject);
+        
     }
     
    

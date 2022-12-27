@@ -59,7 +59,8 @@ public class SpawnManager : MonoBehaviour
         {
             int rand = Random.Range(0, obstaclePrefabs.Length);
 
-            GameObject obs = Instantiate(obstaclePrefabs[rand]);
+            //GameObject obs = Instantiate(obstaclePrefabs[rand]);
+            GameObject obs = PoolsManager.Instance.Spawn(obstaclePrefabs[rand].name);
             obs.transform.position = transform.position + new Vector3(0, 0, -130);
             timer = 0;
         }
@@ -68,28 +69,26 @@ public class SpawnManager : MonoBehaviour
     }
     void spawnCoins2()//spawn coins
     {
+        SpawnCoins();
+        timer += Time.deltaTime;
+
+    }
+
+    void SpawnCoins()
+    {
         if (timer > spawnSpeed)
         {
             int rand = Random.Range(0, coinsPrefabs.Length);
-            GameObject coin = Instantiate(coinsPrefabs[rand]);
+            //GameObject coin = Instantiate(coinsPrefabs[rand]);
+            GameObject coin = PoolsManager.Instance.Spawn(coinsPrefabs[rand].name);
             coin.transform.position = transform.position + new Vector3(0, 0, -130);
             timer = 0;
             Debug.Log("2222");
         }
-        timer += Time.deltaTime;
-
     }
     void spawnCoins1()//spawn coins
     {
-        if (timer > spawnSpeed)
-        {
-            int rand = Random.Range(0, coins1Prefabs.Length);
-            GameObject coin = Instantiate(coins1Prefabs[rand]);
-            coin.transform.position = transform.position + new Vector3(0, 0, -130);
-            timer = 0;
-            Debug.Log("1111");
-
-        }
+       SpawnCoins();
         timer += Time.deltaTime;
 
     }
